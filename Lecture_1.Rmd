@@ -3,4 +3,100 @@ title: "What is Data Science? Lecture 1"
 output: html_document
 date: "2026-05-19"
 ---
+ 
+#Data Wrangling:
+Import -> Tidy -> Transform, Visualize, Model -> Communicate 
+
+#Data Table
+Row - subjects
+Column - variable 
+
+#Tibbles
+Tibbles are data frames 
+
+#Packages: readr, haven, readxl, tidyverse 
+
+####
+This is a repository for data wrangling I, part of Data Science I.
+
+I'm an R Markdown document! 
+
+# Section 1
+
+Here's a **code chunk** that samples from 
+a _normal distribution_:
+
+```{r}
+samp = rnorm(100)
+length(samp)
+```
+
+# Section 2
+
+I can take the mean of the sample, too!
+The mean is `r mean(samp)`.
+
+
+### loading in the code:
+
+```{r}
+library(tidyverse)
+```
+Loading in the library because functions used below use tidyverse library and to be more particular, they use the readr package. 
+
+##Reading in the data, path - says where the data lives.
+Absolute directions - from the very first folder on the computer and following another folders, get the data. 
+Relative path - it is an easier, generalized way. This is starting from the project folder. If stuff is within the same space, then it is easy to locate documents/projects/files, etc.
+
+#Read in the litters dataset:
+```{r}
+litters_df = read_csv("./data_import_examples/FAS_litters.csv")
+```
+read_csv is within readr within tidyverse
+. means the starting point for reading in the data, so the project folder
+
+
+Process to clean-up the data names:
+- Data originally is not in the "snake_case", but written as normal words, so easiest thing to do is to make all the column names a snake_case. Here, we will update the names for the variables identified. 
+- We are going to use clean_names - this function is in the janitor package. We can either access the janitor package by loading it in the libraries chunk, or access it using the janitor:: line.
+- Now, litters_df will overwrite the previous litters_df 
+```{r}
+litters_df = janitor::clean_names(litters_df)
+```
+
+##Take a look at the data:
+- gives number of rows and columns and prints some frist rows and columns
+- everything is a snake_case
+```{r}
+litters_df
+```
+
+#Other things that we can do to look at it:
+```{r}
+head(litters_df)
+tail(litters_df)
+```
+
+#Skim function:
+- comes from skimr package, we can load it by using :: 
+- it will display a summary of things 
+- if we have a character variable, it will tell me  how many are missing 
+- for numeric variable, it will tell me mean, stdev, percentile, values and histogram
+```{r}
+skimr::skim(litters_df)
+```
+
+#View funciton
+- used in the console,  not in the code chunk
+- it will open a separate, full dataset window with the dataframe when placed in the console
+
+#in this dataset, GROUP is a character variable - mix of letters and numbers, the pther rest of the row names are called a DOUBLE - DOUBLE is special name for a NUMBER 
+- missing values in the dataset will be called an NA 
+
+
+
+
+
+
+
 
